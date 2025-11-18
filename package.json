@@ -1,0 +1,26 @@
+{
+  "name": "productdesigns",
+  "version": "1.0.0",
+  "description": "The website for productdesigns.net - where all of my product designs are showcased",
+  "keywords": [
+    "product",
+    "designs",
+    "product",
+    "designs"
+  ],
+  "homepage": "https://github.com/AdamJ/productdesigns#readme",
+  "bugs": {
+    "url": "https://github.com/AdamJ/productdesigns/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamJ/productdesigns.git"
+  },
+  "license": "ISC",
+  "author": "Adam J. Jolicoeur",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
