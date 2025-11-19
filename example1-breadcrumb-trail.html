@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 1: Visual Breadcrumb Trail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            padding: 40px 20px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .showcase-container {
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .design-trail {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .design-trail::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .design-trail::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .design-trail::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .design-card {
+            min-width: 400px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .design-card.peeking {
+            transform: scale(0.85) translateX(50px);
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        .design-card.peeking::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.4) 100%);
+            pointer-events: none;
+        }
+
+        .design-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .design-card.peeking:hover {
+            transform: scale(0.9) translateX(40px);
+        }
+
+        .design-image {
+            width: 100%;
+            height: 65%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .design-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #667eea;
+            backdrop-filter: blur(10px);
+        }
+
+        .design-info {
+            padding: 30px;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .design-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .design-description {
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .next-hint {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #667eea;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+            z-index: 100;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateY(-50%) scale(1);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                transform: translateY(-50%) scale(1.1);
+                box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
+            }
+        }
+
+        .progress-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .game-principle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .game-principle strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-principle">
+        <strong>🎮 Game Principle:</strong>
+        Visual Landmarks & Peeking
+    </div>
+
+    <div class="header">
+        <h1>Design Portfolio</h1>
+        <p>Scroll to discover more designs →</p>
+    </div>
+
+    <div class="showcase-container">
+        <div class="design-trail" id="trail">
+            <div class="design-card">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="design-badge">🎨 UI/UX</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">Mobile Banking App</h2>
+                        <p class="design-description">Intuitive financial management with seamless transactions and real-time insights.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card peeking">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="design-badge">💻 Web Design</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">E-Commerce Platform</h2>
+                        <p class="design-description">Modern shopping experience with AI-powered recommendations and instant checkout.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card peeking">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <div class="design-badge">📱 Mobile</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">Fitness Tracker</h2>
+                        <p class="design-description">Gamified health monitoring with social challenges and achievement systems.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card peeking">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div class="design-badge">🎯 Branding</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">Coffee Shop Identity</h2>
+                        <p class="design-description">Warm, inviting brand experience from logo to packaging design.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card peeking">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                    <div class="design-badge">🎬 Motion</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">Animated Dashboard</h2>
+                        <p class="design-description">Delightful micro-interactions that bring data visualization to life.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="design-card peeking">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <div class="design-badge">🏗️ Product</div>
+                </div>
+                <div class="design-info">
+                    <div>
+                        <h2 class="design-title">Smart Home Interface</h2>
+                        <p class="design-description">Centralized control system for connected home devices with voice integration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="next-hint" id="nextHint">→</div>
+
+    <div class="progress-indicator" id="progressIndicator"></div>
+
+    <script>
+        const trail = document.getElementById('trail');
+        const nextHint = document.getElementById('nextHint');
+        const progressIndicator = document.getElementById('progressIndicator');
+        const cards = document.querySelectorAll('.design-card');
+
+        // Create progress dots
+        cards.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot';
+            if (index === 0) dot.classList.add('active');
+            progressIndicator.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.progress-dot');
+
+        // Update card visibility and progress based on scroll
+        trail.addEventListener('scroll', () => {
+            const scrollLeft = trail.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+            const currentIndex = Math.round(scrollLeft / cardWidth);
+
+            cards.forEach((card, index) => {
+                const distance = Math.abs(index - currentIndex);
+
+                if (distance === 0) {
+                    card.classList.remove('peeking');
+                    dots[index].classList.add('active');
+                } else if (distance === 1) {
+                    card.classList.add('peeking');
+                    card.style.transform = 'scale(0.85) translateX(50px)';
+                    dots[index].classList.remove('active');
+                } else {
+                    card.classList.add('peeking');
+                    card.style.transform = 'scale(0.75) translateX(80px)';
+                    dots[index].classList.remove('active');
+                }
+            });
+
+            // Hide next hint if at the end
+            if (currentIndex >= cards.length - 1) {
+                nextHint.style.opacity = '0';
+                nextHint.style.pointerEvents = 'none';
+            } else {
+                nextHint.style.opacity = '1';
+                nextHint.style.pointerEvents = 'auto';
+            }
+        });
+
+        // Next button functionality
+        nextHint.addEventListener('click', () => {
+            const scrollLeft = trail.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 30;
+            trail.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        // Card click to expand
+        cards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('peeking')) {
+                    const cardWidth = cards[0].offsetWidth + 30;
+                    trail.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

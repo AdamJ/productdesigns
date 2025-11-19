@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 3: Fog of War Reveal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a2e;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .game-principle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .game-principle strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .reveal-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .reveal-counter-value {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal-counter-label {
+            font-size: 0.9em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .header {
+            padding: 120px 40px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .hint {
+            text-align: center;
+            padding: 0 40px 40px;
+            font-size: 1.1em;
+            opacity: 0.6;
+            animation: pulse-text 2s infinite;
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .design-region {
+            aspect-ratio: 1;
+            border-radius: 24px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .design-region:hover {
+            transform: scale(1.05);
+        }
+
+        .fog-layer {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 50%,
+                    rgba(26, 26, 46, 0.3) 0%,
+                    rgba(26, 26, 46, 0.95) 50%,
+                    rgba(26, 26, 46, 1) 100%
+                );
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.8s ease, backdrop-filter 0.8s ease;
+        }
+
+        .fog-layer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 255, 255, 0.02) 10px,
+                    rgba(255, 255, 255, 0.02) 20px
+                );
+            animation: fog-drift 20s linear infinite;
+        }
+
+        @keyframes fog-drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(20px, 20px); }
+        }
+
+        .mystery-icon {
+            font-size: 4em;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .design-region.revealed .fog-layer {
+            opacity: 0;
+            pointer-events: none;
+            backdrop-filter: blur(0);
+        }
+
+        .design-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease;
+        }
+
+        .design-region:hover .design-background {
+            transform: scale(1.1);
+        }
+
+        .design-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .design-region.revealed .design-info {
+            transform: translateY(0);
+        }
+
+        .design-region:hover .design-info {
+            transform: translateY(0);
+        }
+
+        .design-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .design-category {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .reveal-animation {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .reveal-ripple {
+            position: absolute;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            animation: ripple 1s ease-out forwards;
+        }
+
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 500px;
+                height: 500px;
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .completion-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 80px;
+            border-radius: 24px;
+            text-align: center;
+            z-index: 2000;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .completion-banner.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .completion-icon {
+            font-size: 6em;
+            margin-bottom: 20px;
+            animation: rotate-scale 1s ease-in-out infinite;
+        }
+
+        @keyframes rotate-scale {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+        }
+
+        .completion-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .completion-description {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1500;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .reveal-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .design-region:hover .reveal-hint {
+            opacity: 1;
+        }
+
+        .design-region.revealed .reveal-hint {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .map-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-principle">
+        <strong>🎮 Game Principle:</strong>
+        Fog of War & Discovery
+    </div>
+
+    <div class="reveal-counter">
+        <div class="reveal-counter-value" id="revealCount">0</div>
+        <div class="reveal-counter-label">Regions Revealed</div>
+    </div>
+
+    <div class="header">
+        <h1>Design Exploration Map</h1>
+        <p>Uncover hidden design regions</p>
+    </div>
+
+    <div class="hint">Click to reveal what lies beneath the fog...</div>
+
+    <div class="map-container" id="mapContainer">
+        <!-- Design regions will be generated -->
+    </div>
+
+    <div class="reveal-animation" id="revealAnimation"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="completion-banner" id="completionBanner">
+        <div class="completion-icon">🗺️</div>
+        <div class="completion-title">Map Fully Explored!</div>
+        <div class="completion-description">You've uncovered all design regions</div>
+    </div>
+
+    <script>
+        const designs = [
+            {
+                title: 'Mobile Banking Reimagined',
+                category: '🎨 UI/UX Design',
+                gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                icon: '?'
+            },
+            {
+                title: 'E-Commerce Platform',
+                category: '💻 Web Development',
+                gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Fitness & Wellness App',
+                category: '📱 Mobile Design',
+                gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Artisan Coffee Branding',
+                category: '🎯 Brand Identity',
+                gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Data Visualization Suite',
+                category: '🎬 Motion Design',
+                gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Smart Home Control',
+                category: '🏠 IoT Interface',
+                gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Travel Booking Experience',
+                category: '✈️ Travel Tech',
+                gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Meditation & Mindfulness',
+                category: '🧘 Wellness',
+                gradient: 'linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)',
+                icon: '?'
+            },
+            {
+                title: 'Crypto Trading Dashboard',
+                category: '📊 Fintech',
+                gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+                icon: '?'
+            }
+        ];
+
+        const mapContainer = document.getElementById('mapContainer');
+        const revealCount = document.getElementById('revealCount');
+        const revealAnimation = document.getElementById('revealAnimation');
+        let revealed = 0;
+
+        // Generate design regions
+        designs.forEach((design, index) => {
+            const region = document.createElement('div');
+            region.className = 'design-region';
+            region.innerHTML = `
+                <div class="design-background" style="background-image: ${design.gradient};"></div>
+                <div class="fog-layer">
+                    <div class="mystery-icon">${design.icon}</div>
+                </div>
+                <div class="reveal-hint">Click to reveal</div>
+                <div class="design-info">
+                    <h3 class="design-title">${design.title}</h3>
+                    <p class="design-category">${design.category}</p>
+                </div>
+            `;
+
+            region.addEventListener('click', (e) => {
+                if (!region.classList.contains('revealed')) {
+                    revealRegion(region, e);
+                    revealed++;
+                    revealCount.textContent = revealed;
+
+                    if (revealed === designs.length) {
+                        setTimeout(showCompletion, 800);
+                    }
+                }
+            });
+
+            mapContainer.appendChild(region);
+        });
+
+        function revealRegion(region, event) {
+            region.classList.add('revealed');
+
+            // Create ripple effect
+            const rect = region.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            const ripple = document.createElement('div');
+            ripple.className = 'reveal-ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.marginLeft = '-250px';
+            ripple.style.marginTop = '-250px';
+            revealAnimation.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 1000);
+
+            // Create sparkles
+            for (let i = 0; i < 12; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+
+                const angle = (i / 12) * Math.PI * 2;
+                const distance = 100 + Math.random() * 50;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                sparkle.style.setProperty('--tx', tx + 'px');
+                sparkle.style.setProperty('--ty', ty + 'px');
+
+                revealAnimation.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        }
+
+        function showCompletion() {
+            const overlay = document.getElementById('overlay');
+            const banner = document.getElementById('completionBanner');
+
+            overlay.classList.add('show');
+            banner.classList.add('show');
+
+            overlay.addEventListener('click', () => {
+                overlay.classList.remove('show');
+                banner.classList.remove('show');
+            });
+        }
+    </script>
+</body>
+</html>
