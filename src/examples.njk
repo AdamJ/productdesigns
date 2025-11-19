@@ -1,0 +1,397 @@
+---
+layout: alternate.njk
+title: Component Examples - Design System Reference
+stylesheet: /assets/css/examples.css
+script: /assets/js/examples.js
+---
+
+<div class="examples-container">
+    <div class="examples-header">
+        <h1>Component Examples</h1>
+        <p>Static component library for contributors - See <a href="/DESIGN_SYSTEM.md">DESIGN_SYSTEM.md</a> for detailed guidelines</p>
+    </div>
+
+    <!-- Color Palette -->
+    <section class="example-section">
+        <h2>Color Palette</h2>
+        <div class="color-grid">
+            <div class="color-swatch">
+                <div class="color-block" style="background: #43e97b;"></div>
+                <div class="color-label">Neon Green</div>
+                <div class="color-value">#43e97b</div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-block" style="background: #38f9d7;"></div>
+                <div class="color-label">Neon Cyan</div>
+                <div class="color-value">#38f9d7</div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-block" style="background: #f093fb;"></div>
+                <div class="color-label">Neon Magenta</div>
+                <div class="color-value">#f093fb</div>
+            </div>
+            <div class="color-swatch">
+                <div class="color-block" style="background: #0f0f1e;"></div>
+                <div class="color-label">Deep Space</div>
+                <div class="color-value">#0f0f1e</div>
+            </div>
+        </div>
+
+        <h3>Gradients</h3>
+        <div class="gradient-grid">
+            <div class="gradient-swatch">
+                <div class="gradient-block" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                <div class="gradient-label">Primary (Green → Cyan)</div>
+            </div>
+            <div class="gradient-swatch">
+                <div class="gradient-block" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #f093fb 100%);"></div>
+                <div class="gradient-label">Rainbow (Full Spectrum)</div>
+            </div>
+            <div class="gradient-swatch">
+                <div class="gradient-block" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="gradient-label">Achievement (Magenta → Red)</div>
+            </div>
+            <div class="gradient-swatch">
+                <div class="gradient-block" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="gradient-label">Stats (Blue → Purple)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="example-section">
+        <h2>Typography</h2>
+        <div class="typography-examples">
+            <div class="type-example">
+                <div class="type-display">Display Heading</div>
+                <code>font-size: 3em; font-weight: 700;</code>
+            </div>
+            <div class="type-example">
+                <h1 class="type-h1">Heading 1</h1>
+                <code>font-size: 2.5em; font-weight: 700;</code>
+            </div>
+            <div class="type-example">
+                <h2 class="type-h2">Heading 2</h2>
+                <code>font-size: 1.5em; font-weight: 700;</code>
+            </div>
+            <div class="type-example">
+                <p class="type-body">Body text with normal weight and comfortable line-height for readability.</p>
+                <code>font-size: 1em; font-weight: 400; line-height: 1.6;</code>
+            </div>
+            <div class="type-example">
+                <span class="type-small">Small text / labels</span>
+                <code>font-size: 0.85em; font-weight: 500;</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons & Interactive Elements -->
+    <section class="example-section">
+        <h2>Buttons & Interactive Elements</h2>
+        <div class="button-examples">
+            <button class="btn-primary">Primary Button</button>
+            <button class="btn-secondary">Secondary Button</button>
+            <button class="btn-ghost">Ghost Button</button>
+            <button class="btn-icon">
+                <span>→</span>
+            </button>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  color: #0f0f1e;
+  font-weight: 600;
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="example-section">
+        <h2>Design Cards</h2>
+        <div class="card-examples">
+            <div class="design-card-example">
+                <div class="card-image" style="background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);">
+                    <div class="card-badge">🎨 UI/UX</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Example Project</h3>
+                    <p class="card-description">This is a sample design card with gradient background and hover effects.</p>
+                </div>
+            </div>
+
+            <div class="design-card-example active-state">
+                <div class="card-image" style="background: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);">
+                    <div class="card-badge">💻 Web</div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Active State</h3>
+                    <p class="card-description">Card with active/focused state showing neon border glow.</p>
+                </div>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Base Card Style */
+.design-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover State */
+.design-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Active State */
+.design-card.active {
+  border-color: #43e97b;
+  box-shadow: 0 30px 80px rgba(67, 233, 123, 0.4);
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Badges & Tags -->
+    <section class="example-section">
+        <h2>Badges & Tags</h2>
+        <div class="badge-examples">
+            <span class="badge badge-default">Default</span>
+            <span class="badge badge-unlocked">Unlocked</span>
+            <span class="badge badge-level">LVL 5</span>
+            <span class="badge badge-category">🎨 UI/UX</span>
+            <span class="badge badge-category">💻 Web</span>
+            <span class="badge badge-category">📱 Mobile</span>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Badge Base */
+.badge {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Unlocked Badge */
+.badge-unlocked {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  animation: unlock 0.5s ease;
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Progress Indicators -->
+    <section class="example-section">
+        <h2>Progress Indicators</h2>
+        <div class="progress-examples">
+            <div class="progress-bar-example">
+                <label>Progress Bar (60%)</label>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="progress-dots-example">
+                <label>Progress Dots</label>
+                <div class="progress-dots">
+                    <span class="dot active"></span>
+                    <span class="dot active"></span>
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Progress Bar */
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Glass Morphism Panels -->
+    <section class="example-section">
+        <h2>Glass Morphism Panels</h2>
+        <div class="panel-examples">
+            <div class="glass-panel">
+                <h3>Glass Panel</h3>
+                <p>Frosted glass effect with backdrop blur</p>
+            </div>
+            <div class="glass-panel-border">
+                <h3>Glass Panel with Border</h3>
+                <p>Enhanced with neon border glow</p>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Glass Morphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Notifications & Popups -->
+    <section class="example-section">
+        <h2>Notifications & Popups</h2>
+        <div class="notification-examples">
+            <div class="notification-toast">
+                <span>+10 XP · 3/9 Designs Viewed</span>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-content">
+                    <div class="achievement-title">Achievement Unlocked!</div>
+                    <div class="achievement-desc">Viewed your first 3 designs</div>
+                </div>
+            </div>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Notification Toast */
+.notification-toast {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(67, 233, 123, 0.5);
+  animation: slideUp 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}</code></pre>
+        </div>
+    </section>
+
+    <!-- Animations -->
+    <section class="example-section">
+        <h2>Animation Examples</h2>
+        <div class="animation-examples">
+            <div class="anim-box anim-fade">Fade In</div>
+            <div class="anim-box anim-slide">Slide Up</div>
+            <div class="anim-box anim-scale">Scale</div>
+            <div class="anim-box anim-glow">Glow Pulse</div>
+        </div>
+        <button id="replayAnimations" class="btn-secondary">Replay Animations</button>
+        <div class="code-block">
+            <pre><code>/* Fade In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Timing */
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);</code></pre>
+        </div>
+    </section>
+
+    <!-- Glow Effects -->
+    <section class="example-section">
+        <h2>Glow Effects</h2>
+        <div class="glow-examples">
+            <div class="glow-text">Glowing Text</div>
+            <div class="glow-box">Glowing Box</div>
+            <div class="glow-border">Glowing Border</div>
+        </div>
+        <div class="code-block">
+            <pre><code>/* Text Glow */
+text-shadow: 0 0 10px rgba(67, 233, 123, 0.5);
+
+/* Box Glow */
+box-shadow:
+  0 0 60px rgba(67, 233, 123, 0.3),
+  0 30px 80px rgba(67, 233, 123, 0.4);
+
+/* Border Glow */
+border: 2px solid rgba(67, 233, 123, 0.5);
+box-shadow: 0 0 20px rgba(67, 233, 123, 0.3);</code></pre>
+        </div>
+    </section>
+
+    <!-- Meta Information Panel -->
+    <section class="example-section">
+        <h2>Meta Information Display</h2>
+        <div class="meta-examples">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Platform</div>
+                    <div class="meta-value">iOS & Android</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">6 months</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">Lead Designer</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">2024</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Notes -->
+    <section class="example-section usage-notes">
+        <h2>Usage Notes</h2>
+        <div class="notes-content">
+            <h3>Design System Reference</h3>
+            <p>All components should follow the patterns documented in <code>DESIGN_SYSTEM.md</code>. Key principles:</p>
+            <ul>
+                <li><strong>Colors:</strong> Use only colors from the approved palette</li>
+                <li><strong>Gradients:</strong> Apply gradients for emphasis and hierarchy</li>
+                <li><strong>Animations:</strong> Use cubic-bezier easing: <code>cubic-bezier(0.4, 0, 0.2, 1)</code></li>
+                <li><strong>Typography:</strong> Space Grotesk font family exclusively</li>
+                <li><strong>Border Radius:</strong> Use scale: 8px, 12px, 16px, 20px, or 24px</li>
+                <li><strong>Spacing:</strong> Follow 8px grid system</li>
+            </ul>
+
+            <h3>Creating New Components</h3>
+            <ol>
+                <li>Check if a similar component exists in this examples page</li>
+                <li>Reference the design system for colors and patterns</li>
+                <li>Apply glass morphism for overlays and panels</li>
+                <li>Add neon glow effects to interactive elements</li>
+                <li>Use smooth transitions with proper easing</li>
+                <li>Test on mobile and desktop</li>
+                <li>Document new patterns in DESIGN_SYSTEM.md if novel</li>
+            </ol>
+
+            <h3>Performance Guidelines</h3>
+            <ul>
+                <li>Animate only <code>transform</code> and <code>opacity</code> for GPU acceleration</li>
+                <li>Avoid animating <code>width</code>, <code>height</code>, <code>left</code>, <code>top</code></li>
+                <li>Use <code>will-change</code> sparingly and remove after animation</li>
+                <li>Keep animations under 0.5s for page transitions</li>
+                <li>Test with DevTools performance monitor</li>
+            </ul>
+        </div>
+    </section>
+</div>
