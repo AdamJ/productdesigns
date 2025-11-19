@@ -652,13 +652,11 @@
         // Card click to expand
         cards.forEach((card, index) => {
             card.addEventListener('click', () => {
-                if (card.classList.contains('peeking')) {
-                    card.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'center'
-                    });
-                }
+                card.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
             });
         });
 
