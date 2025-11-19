@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example 1: Visual Breadcrumb Trail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +15,21 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f1e;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(67, 233, 123, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .header {
@@ -28,11 +42,18 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 700;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(67, 233, 123, 0.3);
+            letter-spacing: -0.02em;
         }
 
         .header p {
-            opacity: 0.9;
+            opacity: 0.7;
             font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .showcase-container {
@@ -56,31 +77,55 @@
         }
 
         .design-trail::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 4px;
         }
 
         .design-trail::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
             border-radius: 4px;
+            box-shadow: 0 0 10px rgba(67, 233, 123, 0.5);
+        }
+
+        .design-trail::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, #38f9d7 0%, #f093fb 100%);
+            box-shadow: 0 0 15px rgba(67, 233, 123, 0.7);
         }
 
         .design-card {
             min-width: 400px;
             height: 500px;
-            background: white;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
             overflow: hidden;
             scroll-snap-align: start;
             position: relative;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .design-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #f093fb 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .design-card:hover::before {
+            opacity: 1;
         }
 
         .design-card.peeking {
             transform: scale(0.85) translateX(50px);
-            opacity: 0.7;
+            opacity: 0.5;
             filter: blur(2px);
         }
 
@@ -88,17 +133,21 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.4) 100%);
+            background: linear-gradient(90deg, transparent 0%, rgba(15, 15, 30, 0.8) 100%);
             pointer-events: none;
         }
 
         .design-card:hover {
             transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            box-shadow:
+                0 30px 80px rgba(67, 233, 123, 0.4),
+                0 0 60px rgba(67, 233, 123, 0.3),
+                inset 0 0 0 1px rgba(67, 233, 123, 0.5);
         }
 
         .design-card.peeking:hover {
             transform: scale(0.9) translateX(40px);
+            opacity: 0.7;
         }
 
         .design-image {
@@ -109,17 +158,27 @@
             position: relative;
         }
 
+        .design-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(15, 15, 30, 0.8) 100%);
+            pointer-events: none;
+        }
+
         .design-badge {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 0, 0, 0.7);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
-            color: #667eea;
+            color: #43e97b;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(67, 233, 123, 0.3);
+            box-shadow: 0 0 20px rgba(67, 233, 123, 0.3);
         }
 
         .design-info {
@@ -128,17 +187,20 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            background: rgba(15, 15, 30, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .design-title {
             font-size: 1.6em;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(67, 233, 123, 0.3);
         }
 
         .design-description {
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.5;
             font-size: 0.95em;
         }
@@ -150,27 +212,36 @@
             transform: translateY(-50%);
             width: 60px;
             height: 60px;
-            background: white;
+            background: rgba(67, 233, 123, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5em;
-            color: #667eea;
+            color: #43e97b;
             cursor: pointer;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 10px 40px rgba(67, 233, 123, 0.3),
+                inset 0 0 20px rgba(67, 233, 123, 0.1);
+            border: 2px solid rgba(67, 233, 123, 0.5);
             animation: pulse 2s infinite;
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes pulse {
             0%, 100% {
                 transform: translateY(-50%) scale(1);
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                box-shadow:
+                    0 10px 40px rgba(67, 233, 123, 0.3),
+                    inset 0 0 20px rgba(67, 233, 123, 0.1);
             }
             50% {
                 transform: translateY(-50%) scale(1.1);
-                box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
+                box-shadow:
+                    0 15px 60px rgba(67, 233, 123, 0.6),
+                    0 0 40px rgba(67, 233, 123, 0.4),
+                    inset 0 0 30px rgba(67, 233, 123, 0.2);
             }
         }
 
@@ -181,42 +252,54 @@
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px 25px;
             border-radius: 30px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .progress-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .progress-dot.active {
-            background: white;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             transform: scale(1.3);
+            box-shadow:
+                0 0 20px rgba(67, 233, 123, 0.6),
+                0 0 40px rgba(67, 233, 123, 0.3);
+            border-color: #43e97b;
         }
 
         .game-principle {
             position: fixed;
             top: 20px;
             left: 20px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
             padding: 15px 20px;
             border-radius: 12px;
             color: white;
             font-size: 0.9em;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(67, 233, 123, 0.3);
+            box-shadow: 0 0 20px rgba(67, 233, 123, 0.2);
+            z-index: 1000;
         }
 
         .game-principle strong {
             display: block;
             margin-bottom: 5px;
             font-size: 1.1em;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
@@ -234,7 +317,7 @@
     <div class="showcase-container">
         <div class="design-trail" id="trail">
             <div class="design-card">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%); box-shadow: inset 0 0 100px rgba(255, 0, 128, 0.3);">
                     <div class="design-badge">🎨 UI/UX</div>
                 </div>
                 <div class="design-info">
@@ -246,7 +329,7 @@
             </div>
 
             <div class="design-card peeking">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%); box-shadow: inset 0 0 100px rgba(0, 212, 255, 0.3);">
                     <div class="design-badge">💻 Web Design</div>
                 </div>
                 <div class="design-info">
@@ -258,7 +341,7 @@
             </div>
 
             <div class="design-card peeking">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #00ff88 0%, #00ffdd 100%); box-shadow: inset 0 0 100px rgba(0, 255, 136, 0.3);">
                     <div class="design-badge">📱 Mobile</div>
                 </div>
                 <div class="design-info">
@@ -270,7 +353,7 @@
             </div>
 
             <div class="design-card peeking">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #ff0099 0%, #ffff00 100%); box-shadow: inset 0 0 100px rgba(255, 0, 153, 0.3);">
                     <div class="design-badge">🎯 Branding</div>
                 </div>
                 <div class="design-info">
@@ -282,7 +365,7 @@
             </div>
 
             <div class="design-card peeking">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #00ffff 0%, #8800ff 100%); box-shadow: inset 0 0 100px rgba(0, 255, 255, 0.3);">
                     <div class="design-badge">🎬 Motion</div>
                 </div>
                 <div class="design-info">
@@ -294,7 +377,7 @@
             </div>
 
             <div class="design-card peeking">
-                <div class="design-image" style="background-image: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <div class="design-image" style="background-image: linear-gradient(135deg, #ff00ff 0%, #00ffaa 100%); box-shadow: inset 0 0 100px rgba(255, 0, 255, 0.3);">
                     <div class="design-badge">🏗️ Product</div>
                 </div>
                 <div class="design-info">
