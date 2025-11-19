@@ -2,6 +2,52 @@
 
 Landing page for productdesigns.net
 
+## 🚀 Getting Started
+
+This is a static website built with [Eleventy (11ty)](https://www.11ty.dev/) and [Vite](https://vitejs.dev/).
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Start the development server with live reload:
+
+```bash
+npm run start
+```
+
+The site will be available at `http://localhost:8080`
+
+### Build
+
+Build the site for production:
+
+```bash
+npm run build
+```
+
+The built site will be in the `_site/` directory.
+
+### Project Structure
+
+```
+productdesigns/
+├── src/
+│   ├── _data/           # Data files (designs.json)
+│   ├── _includes/       # Layout templates
+│   ├── assets/
+│   │   ├── css/         # Stylesheets
+│   │   └── js/          # JavaScript modules
+│   └── index.njk        # Main page template
+├── .eleventy.js         # Eleventy configuration
+├── vite.config.js       # Vite configuration
+└── package.json
+```
+
 ---
 
 ## 🎮 Gamified Design Showcase Examples
