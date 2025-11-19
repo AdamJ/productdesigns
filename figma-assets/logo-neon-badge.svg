@@ -1,0 +1,52 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#38f9d7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <filter id="badgeGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="80" cy="80" r="75" fill="#0f0f1e"/>
+
+  <!-- Outer ring -->
+  <circle cx="80" cy="80" r="70"
+          fill="none"
+          stroke="url(#badgeGrad)"
+          stroke-width="3"
+          filter="url(#badgeGlow)"/>
+
+  <!-- Inner hexagon -->
+  <path d="M80 30 L115 50 L115 90 L80 110 L45 90 L45 50 Z"
+        fill="none"
+        stroke="url(#badgeGrad)"
+        stroke-width="4"
+        filter="url(#badgeGlow)"/>
+
+  <!-- NEON text -->
+  <text x="80" y="72"
+        font-family="Arial Black, sans-serif"
+        font-size="20"
+        font-weight="900"
+        fill="url(#badgeGrad)"
+        text-anchor="middle"
+        filter="url(#badgeGlow)">NEON</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="92"
+        font-family="Arial, sans-serif"
+        font-size="10"
+        font-weight="400"
+        fill="white"
+        opacity="0.7"
+        text-anchor="middle"
+        letter-spacing="2">DESIGN SYSTEM</text>
+</svg>
