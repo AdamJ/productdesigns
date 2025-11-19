@@ -1,0 +1,80 @@
+[
+  {
+    "title": "Mobile Banking App",
+    "badge": "🎨 UI/UX",
+    "gradient": "linear-gradient(135deg, #ff0080 0%, #ff8c00 100%)",
+    "description": "Intuitive financial management with seamless transactions and real-time insights.",
+    "detailedDescription": "A comprehensive mobile banking solution that reimagines financial management. This app combines intuitive design with powerful features to make managing money effortless and engaging.",
+    "meta": [
+      { "label": "Platform", "value": "iOS & Android" },
+      { "label": "Duration", "value": "6 months" },
+      { "label": "Role", "value": "Lead Designer" },
+      { "label": "Year", "value": "2024" }
+    ]
+  },
+  {
+    "title": "E-Commerce Platform",
+    "badge": "💻 Web Design",
+    "gradient": "linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)",
+    "description": "Modern shopping experience with AI-powered recommendations and instant checkout.",
+    "detailedDescription": "Modern shopping experience powered by AI recommendations and instant checkout. Built for speed and conversion, this platform transforms how customers discover and purchase products.",
+    "meta": [
+      { "label": "Platform", "value": "Web" },
+      { "label": "Duration", "value": "8 months" },
+      { "label": "Role", "value": "UX Designer" },
+      { "label": "Year", "value": "2024" }
+    ]
+  },
+  {
+    "title": "Fitness Tracker",
+    "badge": "📱 Mobile",
+    "gradient": "linear-gradient(135deg, #00ff88 0%, #00ffdd 100%)",
+    "description": "Gamified health monitoring with social challenges and achievement systems.",
+    "detailedDescription": "Gamified health monitoring with social challenges and achievement systems. Track workouts, nutrition, and wellness goals with engaging visualizations and community support.",
+    "meta": [
+      { "label": "Platform", "value": "iOS & Android" },
+      { "label": "Duration", "value": "5 months" },
+      { "label": "Role", "value": "Product Designer" },
+      { "label": "Year", "value": "2023" }
+    ]
+  },
+  {
+    "title": "Coffee Shop Identity",
+    "badge": "🎯 Branding",
+    "gradient": "linear-gradient(135deg, #ff0099 0%, #ffff00 100%)",
+    "description": "Warm, inviting brand experience from logo to packaging design.",
+    "detailedDescription": "Warm, inviting brand experience from logo to packaging design. Creating a cohesive visual identity that captures the artisanal spirit and community focus of local coffee culture.",
+    "meta": [
+      { "label": "Type", "value": "Brand Identity" },
+      { "label": "Duration", "value": "3 months" },
+      { "label": "Role", "value": "Brand Designer" },
+      { "label": "Year", "value": "2023" }
+    ]
+  },
+  {
+    "title": "Animated Dashboard",
+    "badge": "🎬 Motion",
+    "gradient": "linear-gradient(135deg, #00ffff 0%, #8800ff 100%)",
+    "description": "Delightful micro-interactions that bring data visualization to life.",
+    "detailedDescription": "Delightful micro-interactions that bring data visualization to life. Thoughtfully crafted animations guide users through complex information with clarity and elegance.",
+    "meta": [
+      { "label": "Platform", "value": "Web & Mobile" },
+      { "label": "Duration", "value": "4 months" },
+      { "label": "Role", "value": "Motion Designer" },
+      { "label": "Year", "value": "2024" }
+    ]
+  },
+  {
+    "title": "Smart Home Interface",
+    "badge": "🏗️ Product",
+    "gradient": "linear-gradient(135deg, #ff00ff 0%, #00ffaa 100%)",
+    "description": "Centralized control system for connected home devices with voice integration.",
+    "detailedDescription": "Centralized control system for connected home devices with voice integration. Seamlessly manage lighting, temperature, security, and entertainment from a unified interface.",
+    "meta": [
+      { "label": "Platform", "value": "iOS, Android, Web" },
+      { "label": "Duration", "value": "10 months" },
+      { "label": "Role", "value": "Lead Product Designer" },
+      { "label": "Year", "value": "2024" }
+    ]
+  }
+]
