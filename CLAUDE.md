@@ -90,18 +90,21 @@ productdesigns/
 │   │   │   ├── main.css          # Main showcase styles
 │   │   │   ├── discovery-progress.css
 │   │   │   ├── fog-reveal.css
-│   │   │   └── nav.css           # Navigation menu styles
+│   │   │   ├── nav.css           # Navigation menu styles
+│   │   │   └── examples.css      # Component examples page styles
 │   │   ├── js/
 │   │   │   ├── main.js           # Main showcase logic
 │   │   │   ├── discovery-progress.js
 │   │   │   ├── fog-reveal.js
-│   │   │   └── nav.js            # Navigation menu logic
+│   │   │   ├── nav.js            # Navigation menu logic
+│   │   │   └── examples.js       # Component examples page logic
 │   │   └── images/
 │   │       ├── favicon.svg       # Vector favicon
 │   │       └── README.md         # Favicon generation guide
 │   ├── index.njk                 # Visual Trail page
 │   ├── discovery-progress.njk    # Progress System page
-│   └── fog-reveal.njk            # Fog of War page
+│   ├── fog-reveal.njk            # Fog of War page
+│   └── examples.njk              # Component examples (not in nav)
 ├── _site/                        # Generated output (gitignored)
 ├── .eleventy.js                  # Eleventy configuration
 ├── vite.config.js                # Vite configuration
@@ -167,6 +170,17 @@ When adding new components or styles, always:
 4. Maintain neon glow aesthetic
 5. Use Space Grotesk typography
 
+**Component Examples Page:**
+
+For reference implementations and code snippets, visit the component examples page at `/examples/`:
+- View live examples of all UI components
+- See color palette and gradient swatches
+- Copy code snippets for common patterns
+- Understand proper usage of design system elements
+- Reference static implementations without data logic
+
+This page is not included in the navigation menu but is available for contributors at `http://localhost:8080/examples/` during development or at `/examples/` on the live site.
+
 ---
 
 ## 🎯 Key Features
@@ -231,6 +245,15 @@ All showcase modes are fully responsive with:
 - Added animation patterns and timing guidelines
 - Included component patterns and usage rules
 - Established single source of truth for design decisions
+
+**Component Examples Page**
+- Created `/examples/` page as living style guide for contributors
+- Live examples of all UI components with static data
+- Color palette and gradient visual swatches
+- Code snippets for each component pattern
+- Usage guidelines referencing design system
+- Interactive elements (replay animations, hover effects)
+- Not included in navigation menu (contributor resource only)
 
 **Navigation Menu**
 - Implemented neon-themed slide-out navigation
