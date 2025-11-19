@@ -205,9 +205,8 @@
             font-size: 0.95em;
         }
 
-        .next-hint {
+        .nav-hint {
             position: fixed;
-            right: 40px;
             top: 50%;
             transform: translateY(-50%);
             width: 60px;
@@ -227,6 +226,17 @@
             animation: pulse 2s infinite;
             z-index: 100;
             backdrop-filter: blur(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .next-hint {
+            right: 40px;
+        }
+
+        .prev-hint {
+            left: 40px;
+            opacity: 0;
+            pointer-events: none;
         }
 
         @keyframes pulse {
@@ -300,6 +310,128 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .game-principle {
+                top: 10px;
+                left: 10px;
+                padding: 12px 16px;
+                font-size: 0.8em;
+            }
+
+            .design-card {
+                min-width: 85vw;
+                height: 450px;
+            }
+
+            .design-card.peeking {
+                transform: scale(0.9) translateX(30px);
+            }
+
+            .design-card.peeking:hover {
+                transform: scale(0.92) translateX(25px);
+            }
+
+            .design-title {
+                font-size: 1.4em;
+            }
+
+            .design-description {
+                font-size: 0.9em;
+            }
+
+            .design-info {
+                padding: 20px;
+            }
+
+            .nav-hint {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3em;
+            }
+
+            .next-hint {
+                right: 20px;
+            }
+
+            .prev-hint {
+                left: 20px;
+            }
+
+            .progress-indicator {
+                bottom: 20px;
+                padding: 12px 20px;
+            }
+
+            .progress-dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .showcase-container {
+                padding: 20px 10px;
+            }
+
+            .design-trail {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            .game-principle {
+                font-size: 0.75em;
+                padding: 10px 14px;
+            }
+
+            .design-card {
+                min-width: 90vw;
+                height: 400px;
+            }
+
+            .design-title {
+                font-size: 1.2em;
+            }
+
+            .design-description {
+                font-size: 0.85em;
+            }
+
+            .design-badge {
+                font-size: 0.75em;
+                padding: 6px 12px;
+            }
+
+            .nav-hint {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2em;
+            }
+
+            .next-hint {
+                right: 15px;
+            }
+
+            .prev-hint {
+                left: 15px;
+            }
         }
     </style>
 </head>
@@ -390,13 +522,15 @@
         </div>
     </div>
 
-    <div class="next-hint" id="nextHint">→</div>
+    <div class="nav-hint next-hint" id="nextHint">→</div>
+    <div class="nav-hint prev-hint" id="prevHint">←</div>
 
     <div class="progress-indicator" id="progressIndicator"></div>
 
     <script>
         const trail = document.getElementById('trail');
         const nextHint = document.getElementById('nextHint');
+        const prevHint = document.getElementById('prevHint');
         const progressIndicator = document.getElementById('progressIndicator');
         const cards = document.querySelectorAll('.design-card');
 
@@ -410,10 +544,37 @@
 
         const dots = document.querySelectorAll('.progress-dot');
 
+        // Function to update navigation buttons visibility
+        function updateNavButtons(currentIndex) {
+            // Show/hide next button
+            if (currentIndex >= cards.length - 1) {
+                nextHint.style.opacity = '0';
+                nextHint.style.pointerEvents = 'none';
+            } else {
+                nextHint.style.opacity = '1';
+                nextHint.style.pointerEvents = 'auto';
+            }
+
+            // Show/hide prev button
+            if (currentIndex <= 0) {
+                prevHint.style.opacity = '0';
+                prevHint.style.pointerEvents = 'none';
+            } else {
+                prevHint.style.opacity = '1';
+                prevHint.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Get card width accounting for responsive sizing
+        function getCardWidth() {
+            const gap = window.innerWidth <= 768 ? 20 : 30;
+            return cards[0].offsetWidth + gap;
+        }
+
         // Update card visibility and progress based on scroll
         trail.addEventListener('scroll', () => {
             const scrollLeft = trail.scrollLeft;
-            const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+            const cardWidth = getCardWidth();
             const currentIndex = Math.round(scrollLeft / cardWidth);
 
             cards.forEach((card, index) => {
@@ -424,40 +585,54 @@
                     dots[index].classList.add('active');
                 } else if (distance === 1) {
                     card.classList.add('peeking');
-                    card.style.transform = 'scale(0.85) translateX(50px)';
+                    const translateX = window.innerWidth <= 768 ? '30px' : '50px';
+                    const scale = window.innerWidth <= 768 ? '0.9' : '0.85';
+                    card.style.transform = `scale(${scale}) translateX(${translateX})`;
                     dots[index].classList.remove('active');
                 } else {
                     card.classList.add('peeking');
-                    card.style.transform = 'scale(0.75) translateX(80px)';
+                    const translateX = window.innerWidth <= 768 ? '50px' : '80px';
+                    const scale = window.innerWidth <= 768 ? '0.85' : '0.75';
+                    card.style.transform = `scale(${scale}) translateX(${translateX})`;
                     dots[index].classList.remove('active');
                 }
             });
 
-            // Hide next hint if at the end
-            if (currentIndex >= cards.length - 1) {
-                nextHint.style.opacity = '0';
-                nextHint.style.pointerEvents = 'none';
-            } else {
-                nextHint.style.opacity = '1';
-                nextHint.style.pointerEvents = 'auto';
-            }
+            updateNavButtons(currentIndex);
         });
 
         // Next button functionality
         nextHint.addEventListener('click', () => {
-            const scrollLeft = trail.scrollLeft;
-            const cardWidth = cards[0].offsetWidth + 30;
+            const cardWidth = getCardWidth();
             trail.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        // Previous button functionality
+        prevHint.addEventListener('click', () => {
+            const cardWidth = getCardWidth();
+            trail.scrollBy({ left: -cardWidth, behavior: 'smooth' });
         });
 
         // Card click to expand
         cards.forEach((card, index) => {
             card.addEventListener('click', () => {
                 if (card.classList.contains('peeking')) {
-                    const cardWidth = cards[0].offsetWidth + 30;
+                    const cardWidth = getCardWidth();
                     trail.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
                 }
             });
+        });
+
+        // Handle window resize to recalculate positions
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const scrollLeft = trail.scrollLeft;
+                const cardWidth = getCardWidth();
+                const currentIndex = Math.round(scrollLeft / cardWidth);
+                updateNavButtons(currentIndex);
+            }, 100);
         });
     </script>
 </body>
