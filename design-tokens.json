@@ -1,0 +1,484 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "productdesigns": {
+    "colors": {
+      "primary": {
+        "neon-green": {
+          "$type": "color",
+          "$value": "#43e97b",
+          "$description": "Primary accent color for CTAs, highlights, and active states"
+        },
+        "neon-cyan": {
+          "$type": "color",
+          "$value": "#38f9d7",
+          "$description": "Secondary accent color for gradient endpoints"
+        },
+        "neon-magenta": {
+          "$type": "color",
+          "$value": "#f093fb",
+          "$description": "Tertiary accent for achievements and special effects"
+        }
+      },
+      "background": {
+        "deep-space": {
+          "$type": "color",
+          "$value": "#0f0f1e",
+          "$description": "Primary background - very dark blue-black"
+        },
+        "midnight-blue": {
+          "$type": "color",
+          "$value": "#1a1a2e",
+          "$description": "Secondary background - dark blue-grey"
+        }
+      },
+      "white": {
+        "100": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 1)",
+          "$description": "Pure white"
+        },
+        "900": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.9)",
+          "$description": "Primary text"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.8)",
+          "$description": "Secondary text"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.7)",
+          "$description": "Tertiary text"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.5)",
+          "$description": "Disabled/muted text"
+        },
+        "200": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.2)",
+          "$description": "Borders and dividers"
+        },
+        "100": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.1)",
+          "$description": "Subtle backgrounds"
+        },
+        "50": {
+          "$type": "color",
+          "$value": "rgba(255, 255, 255, 0.05)",
+          "$description": "Very subtle overlays"
+        }
+      },
+      "black": {
+        "900": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.9)",
+          "$description": "Overlays and gradients"
+        },
+        "800": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.8)",
+          "$description": "Modal overlays"
+        },
+        "700": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.7)",
+          "$description": "Hover overlays"
+        },
+        "500": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.5)",
+          "$description": "Medium overlays and shadows"
+        },
+        "300": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.3)",
+          "$description": "Code blocks"
+        }
+      }
+    },
+    "gradients": {
+      "primary": {
+        "$type": "gradient",
+        "$value": {
+          "type": "linear",
+          "angle": "135deg",
+          "stops": [
+            {"color": "#43e97b", "position": 0},
+            {"color": "#38f9d7", "position": 1}
+          ]
+        },
+        "$description": "Primary gradient - Green to Cyan"
+      },
+      "rainbow": {
+        "$type": "gradient",
+        "$value": {
+          "type": "linear",
+          "angle": "135deg",
+          "stops": [
+            {"color": "#43e97b", "position": 0},
+            {"color": "#38f9d7", "position": 0.5},
+            {"color": "#f093fb", "position": 1}
+          ]
+        },
+        "$description": "Rainbow gradient - Full spectrum"
+      },
+      "achievement": {
+        "$type": "gradient",
+        "$value": {
+          "type": "linear",
+          "angle": "135deg",
+          "stops": [
+            {"color": "#f093fb", "position": 0},
+            {"color": "#f5576c", "position": 1}
+          ]
+        },
+        "$description": "Achievement gradient - Magenta to Red"
+      },
+      "stats": {
+        "$type": "gradient",
+        "$value": {
+          "type": "linear",
+          "angle": "135deg",
+          "stops": [
+            {"color": "#667eea", "position": 0},
+            {"color": "#764ba2", "position": 1}
+          ]
+        },
+        "$description": "Stats gradient - Blue to Purple"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "primary": {
+          "$type": "fontFamily",
+          "$value": ["Space Grotesk", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+          "$description": "Primary font stack"
+        }
+      },
+      "fontWeight": {
+        "regular": {
+          "$type": "fontWeight",
+          "$value": 400,
+          "$description": "Regular weight for body text"
+        },
+        "medium": {
+          "$type": "fontWeight",
+          "$value": 500,
+          "$description": "Medium weight for labels and emphasis"
+        },
+        "semibold": {
+          "$type": "fontWeight",
+          "$value": 600,
+          "$description": "Semi-bold for subheadings"
+        },
+        "bold": {
+          "$type": "fontWeight",
+          "$value": 700,
+          "$description": "Bold for headings and titles"
+        }
+      },
+      "fontSize": {
+        "display": {
+          "$type": "dimension",
+          "$value": "48px",
+          "$description": "Display/Hero titles"
+        },
+        "h1": {
+          "$type": "dimension",
+          "$value": "40px",
+          "$description": "Heading 1"
+        },
+        "h2": {
+          "$type": "dimension",
+          "$value": "24px",
+          "$description": "Heading 2"
+        },
+        "h3": {
+          "$type": "dimension",
+          "$value": "20px",
+          "$description": "Heading 3"
+        },
+        "body": {
+          "$type": "dimension",
+          "$value": "16px",
+          "$description": "Body text"
+        },
+        "small": {
+          "$type": "dimension",
+          "$value": "14px",
+          "$description": "Small text and labels"
+        }
+      },
+      "lineHeight": {
+        "tight": {
+          "$type": "dimension",
+          "$value": "120%",
+          "$description": "Tight line height for headings"
+        },
+        "normal": {
+          "$type": "dimension",
+          "$value": "140%",
+          "$description": "Normal line height"
+        },
+        "relaxed": {
+          "$type": "dimension",
+          "$value": "160%",
+          "$description": "Relaxed line height for body text"
+        }
+      },
+      "letterSpacing": {
+        "tight": {
+          "$type": "dimension",
+          "$value": "-1%",
+          "$description": "Tight letter spacing for large headings"
+        },
+        "normal": {
+          "$type": "dimension",
+          "$value": "0%",
+          "$description": "Normal letter spacing"
+        },
+        "wide": {
+          "$type": "dimension",
+          "$value": "5%",
+          "$description": "Wide letter spacing for labels"
+        }
+      }
+    },
+    "spacing": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Extra small spacing"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Small spacing"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Medium spacing"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "40px",
+        "$description": "Large spacing"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "60px",
+        "$description": "Extra large spacing"
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "80px",
+        "$description": "2X large spacing"
+      }
+    },
+    "borderRadius": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Small radius for badges"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "Medium radius for buttons"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "Large radius for cards"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Extra large radius for panels"
+      },
+      "pill": {
+        "$type": "dimension",
+        "$value": "9999px",
+        "$description": "Pill shape"
+      }
+    },
+    "borderWidth": {
+      "thin": {
+        "$type": "dimension",
+        "$value": "1px",
+        "$description": "Thin border"
+      },
+      "regular": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Regular border"
+      },
+      "thick": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Thick border for accents"
+      }
+    },
+    "shadows": {
+      "card-default": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "30px",
+          "spread": "0px",
+          "color": "rgba(0, 0, 0, 0.3)"
+        },
+        "$description": "Default card shadow"
+      },
+      "card-hover": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "20px",
+          "blur": "60px",
+          "spread": "0px",
+          "color": "rgba(0, 0, 0, 0.5)"
+        },
+        "$description": "Card hover shadow"
+      },
+      "card-active": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "offsetX": "0px",
+            "offsetY": "30px",
+            "blur": "80px",
+            "spread": "0px",
+            "color": "rgba(67, 233, 123, 0.4)"
+          },
+          {
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "60px",
+            "spread": "0px",
+            "color": "rgba(67, 233, 123, 0.3)"
+          }
+        ],
+        "$description": "Card active/focused state shadow with glow"
+      },
+      "text-glow": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "10px",
+          "spread": "0px",
+          "color": "rgba(67, 233, 123, 0.5)"
+        },
+        "$description": "Neon text glow effect"
+      },
+      "button-hover": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "30px",
+          "spread": "0px",
+          "color": "rgba(67, 233, 123, 0.4)"
+        },
+        "$description": "Button hover shadow"
+      },
+      "notification": {
+        "$type": "shadow",
+        "$value": {
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "40px",
+          "spread": "0px",
+          "color": "rgba(67, 233, 123, 0.5)"
+        },
+        "$description": "Notification toast shadow"
+      }
+    },
+    "blur": {
+      "backdrop": {
+        "$type": "dimension",
+        "$value": "10px",
+        "$description": "Standard backdrop blur for glass morphism"
+      },
+      "backdrop-heavy": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "Heavy backdrop blur for navigation"
+      }
+    },
+    "duration": {
+      "instant": {
+        "$type": "duration",
+        "$value": "0ms",
+        "$description": "No animation"
+      },
+      "fast": {
+        "$type": "duration",
+        "$value": "200ms",
+        "$description": "Fast micro-interactions"
+      },
+      "normal": {
+        "$type": "duration",
+        "$value": "300ms",
+        "$description": "Normal transitions"
+      },
+      "slow": {
+        "$type": "duration",
+        "$value": "400ms",
+        "$description": "Slower component transitions"
+      },
+      "page": {
+        "$type": "duration",
+        "$value": "500ms",
+        "$description": "Page transitions"
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [0.4, 0, 0.2, 1],
+        "$description": "Material Design standard easing"
+      },
+      "spring": {
+        "$type": "cubicBezier",
+        "$value": [0.68, -0.55, 0.265, 1.55],
+        "$description": "Spring bounce easing for entry animations"
+      },
+      "ease-out": {
+        "$type": "cubicBezier",
+        "$value": [0, 0, 0.2, 1],
+        "$description": "Ease out for exit animations"
+      }
+    },
+    "breakpoints": {
+      "mobile": {
+        "$type": "dimension",
+        "$value": "480px",
+        "$description": "Mobile breakpoint max-width"
+      },
+      "tablet": {
+        "$type": "dimension",
+        "$value": "768px",
+        "$description": "Tablet breakpoint max-width"
+      },
+      "desktop": {
+        "$type": "dimension",
+        "$value": "1024px",
+        "$description": "Desktop breakpoint max-width"
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "1440px",
+        "$description": "Wide desktop min-width"
+      }
+    }
+  }
+}
