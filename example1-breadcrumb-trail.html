@@ -66,12 +66,13 @@
             display: flex;
             gap: 30px;
             overflow-x: auto;
-            padding: 20px 0 20px 20px;
+            padding: 20px 0;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
 
+        .design-trail::before,
         .design-trail::after {
             content: '';
             flex-shrink: 0;
@@ -393,14 +394,15 @@
             }
 
             .showcase-container {
-                padding: 20px 0 20px 10px;
+                padding: 20px 0;
             }
 
             .design-trail {
                 gap: 20px;
-                padding: 20px 0 20px 10px;
+                padding: 20px 0;
             }
 
+            .design-trail::before,
             .design-trail::after {
                 width: calc(50vw - 42.5vw);
                 min-width: 10px;
@@ -457,6 +459,7 @@
                 left: 15px;
             }
 
+            .design-trail::before,
             .design-trail::after {
                 width: calc(50vw - 45vw);
                 min-width: 10px;
