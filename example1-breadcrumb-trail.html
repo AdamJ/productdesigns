@@ -605,12 +605,27 @@
 
         // Update card visibility and progress based on scroll
         trail.addEventListener('scroll', () => {
-            const scrollLeft = trail.scrollLeft;
-            const cardWidth = getCardWidth();
-            const currentIndex = Math.round(scrollLeft / cardWidth);
+            // Find which card is closest to the center of the viewport
+            const trailRect = trail.getBoundingClientRect();
+            const centerX = trailRect.left + trailRect.width / 2;
+
+            let closestIndex = 0;
+            let closestDistance = Infinity;
 
             cards.forEach((card, index) => {
-                const distance = Math.abs(index - currentIndex);
+                const cardRect = card.getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const distance = Math.abs(centerX - cardCenterX);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            // Update all cards based on their distance from the focused card
+            cards.forEach((card, index) => {
+                const distance = Math.abs(index - closestIndex);
 
                 if (distance === 0) {
                     card.classList.remove('peeking');
@@ -634,7 +649,7 @@
                 }
             });
 
-            updateNavButtons(currentIndex);
+            updateNavButtons(closestIndex);
         });
 
         // Next button functionality
@@ -665,10 +680,25 @@
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                const scrollLeft = trail.scrollLeft;
-                const cardWidth = getCardWidth();
-                const currentIndex = Math.round(scrollLeft / cardWidth);
-                updateNavButtons(currentIndex);
+                // Find which card is closest to center after resize
+                const trailRect = trail.getBoundingClientRect();
+                const centerX = trailRect.left + trailRect.width / 2;
+
+                let closestIndex = 0;
+                let closestDistance = Infinity;
+
+                cards.forEach((card, index) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const distance = Math.abs(centerX - cardCenterX);
+
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestIndex = index;
+                    }
+                });
+
+                updateNavButtons(closestIndex);
             }, 100);
         });
     </script>
