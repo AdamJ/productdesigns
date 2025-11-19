@@ -105,7 +105,7 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: 20px;
             overflow: hidden;
-            scroll-snap-align: start;
+            scroll-snap-align: center;
             position: relative;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -124,6 +124,19 @@
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: -1;
+        }
+
+        .design-card.focused {
+            transform: scale(1.08) translateY(-15px);
+            box-shadow:
+                0 30px 80px rgba(67, 233, 123, 0.4),
+                0 0 60px rgba(67, 233, 123, 0.3),
+                inset 0 0 0 1px rgba(67, 233, 123, 0.5);
+            z-index: 10;
+        }
+
+        .design-card.focused::before {
+            opacity: 1;
         }
 
         .design-card:hover::before {
@@ -331,6 +344,10 @@
                 height: 450px;
             }
 
+            .design-card.focused {
+                transform: scale(1.05) translateY(-10px);
+            }
+
             .design-card.peeking {
                 transform: scale(0.9) translateX(30px);
             }
@@ -407,6 +424,10 @@
             .design-card {
                 min-width: 90vw;
                 height: 400px;
+            }
+
+            .design-card.focused {
+                transform: scale(1.03) translateY(-8px);
             }
 
             .design-title {
@@ -552,6 +573,9 @@
 
         const dots = document.querySelectorAll('.progress-dot');
 
+        // Set first card as focused initially
+        cards[0].classList.add('focused');
+
         // Function to update navigation buttons visibility
         function updateNavButtons(currentIndex) {
             // Show/hide next button
@@ -590,19 +614,23 @@
 
                 if (distance === 0) {
                     card.classList.remove('peeking');
+                    card.classList.add('focused');
                     dots[index].classList.add('active');
-                } else if (distance === 1) {
-                    card.classList.add('peeking');
-                    const translateX = window.innerWidth <= 768 ? '30px' : '50px';
-                    const scale = window.innerWidth <= 768 ? '0.9' : '0.85';
-                    card.style.transform = `scale(${scale}) translateX(${translateX})`;
-                    dots[index].classList.remove('active');
                 } else {
-                    card.classList.add('peeking');
-                    const translateX = window.innerWidth <= 768 ? '50px' : '80px';
-                    const scale = window.innerWidth <= 768 ? '0.85' : '0.75';
-                    card.style.transform = `scale(${scale}) translateX(${translateX})`;
-                    dots[index].classList.remove('active');
+                    card.classList.remove('focused');
+                    if (distance === 1) {
+                        card.classList.add('peeking');
+                        const translateX = window.innerWidth <= 768 ? '30px' : '50px';
+                        const scale = window.innerWidth <= 768 ? '0.9' : '0.85';
+                        card.style.transform = `scale(${scale}) translateX(${translateX})`;
+                        dots[index].classList.remove('active');
+                    } else {
+                        card.classList.add('peeking');
+                        const translateX = window.innerWidth <= 768 ? '50px' : '80px';
+                        const scale = window.innerWidth <= 768 ? '0.85' : '0.75';
+                        card.style.transform = `scale(${scale}) translateX(${translateX})`;
+                        dots[index].classList.remove('active');
+                    }
                 }
             });
 
@@ -625,8 +653,11 @@
         cards.forEach((card, index) => {
             card.addEventListener('click', () => {
                 if (card.classList.contains('peeking')) {
-                    const cardWidth = getCardWidth();
-                    trail.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+                    card.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'center'
+                    });
                 }
             });
         });
