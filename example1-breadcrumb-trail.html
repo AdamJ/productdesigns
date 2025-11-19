@@ -66,10 +66,17 @@
             display: flex;
             gap: 30px;
             overflow-x: auto;
-            padding: 20px 0;
+            padding: 20px 0 20px 20px;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+        }
+
+        .design-trail::after {
+            content: '';
+            flex-shrink: 0;
+            width: calc(50vw - 200px);
+            min-width: 20px;
         }
 
         .design-trail::-webkit-scrollbar {
@@ -369,11 +376,17 @@
             }
 
             .showcase-container {
-                padding: 20px 10px;
+                padding: 20px 0 20px 10px;
             }
 
             .design-trail {
                 gap: 20px;
+                padding: 20px 0 20px 10px;
+            }
+
+            .design-trail::after {
+                width: calc(50vw - 42.5vw);
+                min-width: 10px;
             }
         }
 
@@ -421,6 +434,11 @@
 
             .prev-hint {
                 left: 15px;
+            }
+
+            .design-trail::after {
+                width: calc(50vw - 45vw);
+                min-width: 10px;
             }
         }
     </style>
