@@ -43,11 +43,14 @@
     {% if '/assets/css/main.css' | url %}
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
     {% endif %}
+    <link rel="stylesheet" href="/assets/css/nav.css">
 </head>
 <body>
+    {% include "nav.njk" %}
     {{ content | safe }}
     {% if '/assets/js/main.js' | url %}
     <script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
     {% endif %}
+    <script type="module" src="/assets/js/nav.js"></script>
 </body>
 </html>
