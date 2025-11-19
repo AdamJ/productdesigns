@@ -323,6 +323,135 @@
             background-clip: text;
         }
 
+        /* Detail Section Styles */
+        .detail-section {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 0 40px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease, max-height 0.5s ease;
+        }
+
+        .detail-section.active {
+            opacity: 1;
+            max-height: 1000px;
+        }
+
+        .detail-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 50px;
+            position: relative;
+            border: 2px solid rgba(67, 233, 123, 0.3);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(67, 233, 123, 0.2);
+        }
+
+        .detail-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: rgba(67, 233, 123, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid rgba(67, 233, 123, 0.5);
+            color: #43e97b;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+        .detail-close:hover {
+            background: rgba(67, 233, 123, 0.2);
+            box-shadow: 0 0 20px rgba(67, 233, 123, 0.5);
+            transform: rotate(90deg);
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .detail-image {
+            flex-shrink: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-badge {
+            display: inline-block;
+            background: rgba(67, 233, 123, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #43e97b;
+            border: 1px solid rgba(67, 233, 123, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .detail-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .meta-label {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-value {
+            font-size: 1.1em;
+            color: #43e97b;
+            font-weight: 600;
+        }
+
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             .header h1 {
@@ -407,6 +536,41 @@
                 width: calc(50vw - 42.5vw);
                 min-width: 10px;
             }
+
+            .detail-section {
+                padding: 0 20px;
+                margin: 30px auto 0;
+            }
+
+            .detail-container {
+                padding: 30px;
+            }
+
+            .detail-header {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .detail-image {
+                width: 100%;
+                height: 250px;
+            }
+
+            .detail-title {
+                font-size: 2em;
+            }
+
+            .detail-description {
+                font-size: 1em;
+            }
+
+            .detail-close {
+                top: 20px;
+                right: 20px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.2em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -463,6 +627,35 @@
             .design-trail::after {
                 width: calc(50vw - 45vw);
                 min-width: 10px;
+            }
+
+            .detail-section {
+                padding: 0 15px;
+                margin: 20px auto 0;
+            }
+
+            .detail-container {
+                padding: 25px;
+            }
+
+            .detail-title {
+                font-size: 1.6em;
+            }
+
+            .detail-description {
+                font-size: 0.95em;
+            }
+
+            .detail-image {
+                height: 200px;
+            }
+
+            .detail-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .meta-item {
+                padding: 15px;
             }
         }
     </style>
@@ -559,12 +752,152 @@
 
     <div class="progress-indicator" id="progressIndicator"></div>
 
+    <!-- Detail Section -->
+    <div class="detail-section" id="detailSection">
+        <div class="detail-container">
+            <div class="detail-close" id="detailClose">×</div>
+            <div class="detail-header">
+                <div class="detail-image" id="detailImage"></div>
+                <div class="detail-info">
+                    <div class="detail-badge" id="detailBadge"></div>
+                    <h2 class="detail-title" id="detailTitle"></h2>
+                    <p class="detail-description" id="detailDescription"></p>
+                </div>
+            </div>
+            <div class="detail-meta" id="detailMeta">
+                <!-- Meta items will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
     <script>
         const trail = document.getElementById('trail');
         const nextHint = document.getElementById('nextHint');
         const prevHint = document.getElementById('prevHint');
         const progressIndicator = document.getElementById('progressIndicator');
         const cards = document.querySelectorAll('.design-card');
+        const detailSection = document.getElementById('detailSection');
+        const detailClose = document.getElementById('detailClose');
+        const detailImage = document.getElementById('detailImage');
+        const detailBadge = document.getElementById('detailBadge');
+        const detailTitle = document.getElementById('detailTitle');
+        const detailDescription = document.getElementById('detailDescription');
+        const detailMeta = document.getElementById('detailMeta');
+
+        // Card data with detailed information
+        const cardData = [
+            {
+                title: 'Mobile Banking App',
+                badge: '🎨 UI/UX',
+                gradient: 'linear-gradient(135deg, #ff0080 0%, #ff8c00 100%)',
+                description: 'A comprehensive mobile banking solution that reimagines financial management. This app combines intuitive design with powerful features to make managing money effortless and engaging.',
+                meta: [
+                    { label: 'Platform', value: 'iOS & Android' },
+                    { label: 'Duration', value: '6 months' },
+                    { label: 'Role', value: 'Lead Designer' },
+                    { label: 'Year', value: '2024' }
+                ]
+            },
+            {
+                title: 'E-Commerce Platform',
+                badge: '💻 Web Design',
+                gradient: 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)',
+                description: 'Modern shopping experience powered by AI recommendations and instant checkout. Built for speed and conversion, this platform transforms how customers discover and purchase products.',
+                meta: [
+                    { label: 'Platform', value: 'Web' },
+                    { label: 'Duration', value: '8 months' },
+                    { label: 'Role', value: 'UX Designer' },
+                    { label: 'Year', value: '2024' }
+                ]
+            },
+            {
+                title: 'Fitness Tracker',
+                badge: '📱 Mobile',
+                gradient: 'linear-gradient(135deg, #00ff88 0%, #00ffdd 100%)',
+                description: 'Gamified health monitoring with social challenges and achievement systems. Track workouts, nutrition, and wellness goals with engaging visualizations and community support.',
+                meta: [
+                    { label: 'Platform', value: 'iOS & Android' },
+                    { label: 'Duration', value: '5 months' },
+                    { label: 'Role', value: 'Product Designer' },
+                    { label: 'Year', value: '2023' }
+                ]
+            },
+            {
+                title: 'Coffee Shop Identity',
+                badge: '🎯 Branding',
+                gradient: 'linear-gradient(135deg, #ff0099 0%, #ffff00 100%)',
+                description: 'Warm, inviting brand experience from logo to packaging design. Creating a cohesive visual identity that captures the artisanal spirit and community focus of local coffee culture.',
+                meta: [
+                    { label: 'Type', value: 'Brand Identity' },
+                    { label: 'Duration', value: '3 months' },
+                    { label: 'Role', value: 'Brand Designer' },
+                    { label: 'Year', value: '2023' }
+                ]
+            },
+            {
+                title: 'Animated Dashboard',
+                badge: '🎬 Motion',
+                gradient: 'linear-gradient(135deg, #00ffff 0%, #8800ff 100%)',
+                description: 'Delightful micro-interactions that bring data visualization to life. Thoughtfully crafted animations guide users through complex information with clarity and elegance.',
+                meta: [
+                    { label: 'Platform', value: 'Web & Mobile' },
+                    { label: 'Duration', value: '4 months' },
+                    { label: 'Role', value: 'Motion Designer' },
+                    { label: 'Year', value: '2024' }
+                ]
+            },
+            {
+                title: 'Smart Home Interface',
+                badge: '🏗️ Product',
+                gradient: 'linear-gradient(135deg, #ff00ff 0%, #00ffaa 100%)',
+                description: 'Centralized control system for connected home devices with voice integration. Seamlessly manage lighting, temperature, security, and entertainment from a unified interface.',
+                meta: [
+                    { label: 'Platform', value: 'iOS, Android, Web' },
+                    { label: 'Duration', value: '10 months' },
+                    { label: 'Role', value: 'Lead Product Designer' },
+                    { label: 'Year', value: '2024' }
+                ]
+            }
+        ];
+
+        // Function to show detail section with card data
+        function showDetail(index) {
+            const data = cardData[index];
+
+            // Populate detail section
+            detailImage.style.backgroundImage = data.gradient;
+            detailBadge.textContent = data.badge;
+            detailTitle.textContent = data.title;
+            detailDescription.textContent = data.description;
+
+            // Clear and populate meta items
+            detailMeta.innerHTML = '';
+            data.meta.forEach(item => {
+                const metaItem = document.createElement('div');
+                metaItem.className = 'meta-item';
+                metaItem.innerHTML = `
+                    <div class="meta-label">${item.label}</div>
+                    <div class="meta-value">${item.value}</div>
+                `;
+                detailMeta.appendChild(metaItem);
+            });
+
+            // Show detail section
+            detailSection.classList.add('active');
+
+            // Scroll to detail section smoothly
+            setTimeout(() => {
+                detailSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+
+        // Function to hide detail section
+        function hideDetail() {
+            detailSection.classList.remove('active');
+        }
+
+        // Close button handler
+        detailClose.addEventListener('click', hideDetail);
 
         // Create progress dots
         cards.forEach((_, index) => {
@@ -667,14 +1000,20 @@
             trail.scrollBy({ left: -cardWidth, behavior: 'smooth' });
         });
 
-        // Card click to expand
+        // Card click to expand and show details
         cards.forEach((card, index) => {
             card.addEventListener('click', () => {
+                // Scroll card into view
                 card.scrollIntoView({
                     behavior: 'smooth',
                     block: 'nearest',
                     inline: 'center'
                 });
+
+                // Show detail section after a brief delay
+                setTimeout(() => {
+                    showDetail(index);
+                }, 600);
             });
         });
 
