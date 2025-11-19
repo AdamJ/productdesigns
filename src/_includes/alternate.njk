@@ -40,14 +40,19 @@
     <!-- Optimized font loading with font-display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    {% if '/assets/css/main.css' | url %}
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+    <!-- Page-specific stylesheet -->
+    {% if stylesheet %}
+    <link rel="stylesheet" href="{{ stylesheet }}">
     {% endif %}
+
 </head>
 <body>
     {{ content | safe }}
-    {% if '/assets/js/main.js' | url %}
-    <script type="module" src="{{ '/assets/js/main.js' | url }}"></script>
+
+    <!-- Page-specific script -->
+    {% if script %}
+    <script type="module" src="{{ script }}"></script>
     {% endif %}
+
 </body>
 </html>

@@ -1,0 +1,58 @@
+---
+layout: alternate.njk
+title: Discovery & Progress System - Design Portfolio
+stylesheet: /assets/css/discovery-progress.css
+script: /assets/js/discovery-progress.js
+---
+
+<div class="game-principle">
+    <strong>🎮 Game Principle:</strong>
+    Progress Tracking & Achievements
+</div>
+
+<div class="stats-panel">
+    <div class="stats-header">
+        Explorer
+        <span class="level-badge" id="levelBadge">LVL 1</span>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value" id="viewedCount">0</div>
+            <div class="stat-label">Viewed</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="totalCount">9</div>
+            <div class="stat-label">Total</div>
+        </div>
+    </div>
+    <div class="collections">
+        <div class="collection-title">Categories Explored</div>
+        <div class="collection-badges">
+            <div class="badge" data-category="ui">🎨 UI/UX</div>
+            <div class="badge" data-category="web">💻 Web</div>
+            <div class="badge" data-category="mobile">📱 Mobile</div>
+            <div class="badge" data-category="branding">🎯 Brand</div>
+            <div class="badge" data-category="motion">🎬 Motion</div>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <h1>Design Discovery</h1>
+    <p>Explore all designs to unlock achievements</p>
+</div>
+
+<div class="gallery" id="gallery">
+    <!-- Design cards will be generated -->
+</div>
+
+<div class="notification" id="notification"></div>
+<div class="overlay" id="overlay"></div>
+<div class="achievement-popup" id="achievementPopup">
+    <div class="achievement-icon">🏆</div>
+    <div class="achievement-title">Achievement Unlocked!</div>
+    <div class="achievement-description" id="achievementText"></div>
+</div>
