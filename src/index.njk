@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: Design Portfolio - Visual Breadcrumb Trail
+---
+
+<div class="game-principle">
+    <strong>🎮 Game Principle:</strong>
+    Visual Landmarks & Peeking
+</div>
+
+<div class="header">
+    <h1>Design Portfolio</h1>
+    <p>Scroll to discover more designs →</p>
+</div>
+
+<div class="showcase-container">
+    <div class="design-trail" id="trail">
+        {% for design in designs %}
+        <div class="design-card {% if loop.index > 1 %}peeking{% endif %}"
+             data-title="{{ design.title }}"
+             data-badge="{{ design.badge }}"
+             data-gradient="{{ design.gradient }}"
+             data-description="{{ design.detailedDescription }}"
+             data-meta='{{ design.meta | dump | safe }}'>
+            <div class="design-image" style="background-image: {{ design.gradient }}; box-shadow: inset 0 0 100px rgba({{ loop.index * 50 }}, 0, {{ loop.index * 30 }}, 0.3);">
+                <div class="design-badge">{{ design.badge }}</div>
+            </div>
+            <div class="design-info">
+                <div>
+                    <h2 class="design-title">{{ design.title }}</h2>
+                    <p class="design-description">{{ design.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="nav-hint next-hint" id="nextHint">→</div>
+    <div class="nav-hint prev-hint" id="prevHint">←</div>
+</div>
+
+<div class="progress-indicator" id="progressIndicator"></div>
+
+<!-- Detail Section -->
+<div class="detail-section" id="detailSection">
+    <div class="detail-container">
+        <div class="detail-close" id="detailClose">×</div>
+        <div class="detail-header">
+            <div class="detail-image" id="detailImage"></div>
+            <div class="detail-info">
+                <div class="detail-badge" id="detailBadge"></div>
+                <h2 class="detail-title" id="detailTitle"></h2>
+                <p class="detail-description" id="detailDescription"></p>
+            </div>
+        </div>
+        <div class="detail-meta" id="detailMeta">
+            <!-- Meta items will be dynamically inserted here -->
+        </div>
+    </div>
+</div>

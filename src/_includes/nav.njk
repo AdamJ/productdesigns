@@ -1,0 +1,62 @@
+<nav class="main-nav" id="mainNav">
+    <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <div class="nav-header">
+            <div class="nav-title">Showcase Modes</div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="/" class="nav-link{% if page.url == '/' %} active{% endif %}">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-text">
+                        <span class="nav-label">Visual Trail</span>
+                        <span class="nav-description">Breadcrumb & Peeking</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/discovery-progress/" class="nav-link{% if page.url == '/discovery-progress/' %} active{% endif %}">
+                    <span class="nav-icon">🏆</span>
+                    <span class="nav-text">
+                        <span class="nav-label">Progress System</span>
+                        <span class="nav-description">Achievements & XP</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/fog-reveal/" class="nav-link{% if page.url == '/fog-reveal/' %} active{% endif %}">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-text">
+                        <span class="nav-label">Fog of War</span>
+                        <span class="nav-description">Territory Discovery</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div class="nav-divider"></div>
+        <div class="nav-header">
+            <div class="nav-title">Resources</div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="/branding/" class="nav-link{% if page.url == '/branding/' %} active{% endif %}">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-text">
+                        <span class="nav-label">Brand Identity</span>
+                        <span class="nav-description">ArcLight Pulse</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div class="nav-footer">
+            <div class="nav-credit">
+                <span>ArcLight Pulse Design System</span>
+            </div>
+        </div>
+    </div>
+    <div class="nav-overlay" id="navOverlay"></div>
+</nav>

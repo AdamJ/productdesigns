@@ -1,0 +1,79 @@
+<svg width="320" height="100" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#38f9d7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <filter id="circuitGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Circuit pattern for "A" -->
+  <path d="M20 70 L35 30 L50 70 M30 55 L45 55"
+        stroke="url(#circuitGrad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#circuitGlow)"/>
+  <circle cx="35" cy="30" r="3" fill="url(#circuitGrad)" filter="url(#circuitGlow)"/>
+
+  <!-- Circuit trace connector -->
+  <path d="M55 50 L70 50"
+        stroke="url(#circuitGrad)"
+        stroke-width="2"
+        fill="none"
+        filter="url(#circuitGlow)"/>
+  <circle cx="70" cy="50" r="2" fill="url(#circuitGrad)" filter="url(#circuitGlow)"/>
+
+  <!-- Circuit pattern for "L" -->
+  <path d="M80 30 L80 70 L105 70"
+        stroke="url(#circuitGrad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#circuitGlow)"/>
+  <circle cx="80" cy="30" r="3" fill="url(#circuitGrad)" filter="url(#circuitGlow)"/>
+
+  <!-- Circuit trace connector -->
+  <path d="M110 50 L125 50"
+        stroke="url(#circuitGrad)"
+        stroke-width="2"
+        fill="none"
+        filter="url(#circuitGlow)"/>
+  <circle cx="125" cy="50" r="2" fill="url(#circuitGrad)" filter="url(#circuitGlow)"/>
+
+  <!-- Circuit pattern for "P" -->
+  <path d="M135 30 L135 70 M135 30 L155 30 Q165 30, 165 42 Q165 54, 155 54 L135 54"
+        stroke="url(#circuitGrad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        filter="url(#circuitGlow)"/>
+  <circle cx="165" cy="42" r="3" fill="url(#circuitGrad)" filter="url(#circuitGlow)"/>
+
+  <!-- Subtitle -->
+  <text x="20" y="90"
+        font-family="Space Grotesk, Arial, sans-serif"
+        font-size="12"
+        font-weight="400"
+        fill="white"
+        opacity="0.7"
+        letter-spacing="2">ARCLIGHT PULSE</text>
+
+  <text x="190" y="90"
+        font-family="Space Grotesk, Arial, sans-serif"
+        font-size="10"
+        font-weight="300"
+        fill="white"
+        opacity="0.5"
+        letter-spacing="1">DESIGN SYSTEM</text>
+</svg>

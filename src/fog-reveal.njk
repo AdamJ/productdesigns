@@ -1,0 +1,35 @@
+---
+layout: alternate.njk
+title: Fog of War Reveal - Design Portfolio
+stylesheet: /assets/css/fog-reveal.css
+script: /assets/js/fog-reveal.js
+---
+
+<div class="game-principle">
+    <strong>🎮 Game Principle:</strong>
+    Fog of War & Discovery
+</div>
+
+<div class="reveal-counter">
+    <div class="reveal-counter-value" id="revealCount">0</div>
+    <div class="reveal-counter-label">Regions Revealed</div>
+</div>
+
+<div class="header">
+    <h1>Design Exploration Map</h1>
+    <p>Uncover hidden design regions</p>
+</div>
+
+<div class="hint">Click to reveal what lies beneath the fog...</div>
+
+<div class="map-container" id="mapContainer">
+    <!-- Design regions will be generated -->
+</div>
+
+<div class="reveal-animation" id="revealAnimation"></div>
+<div class="overlay" id="overlay"></div>
+<div class="completion-banner" id="completionBanner">
+    <div class="completion-icon">🗺️</div>
+    <div class="completion-title">Map Fully Explored!</div>
+    <div class="completion-description">You've uncovered all design regions</div>
+</div>
