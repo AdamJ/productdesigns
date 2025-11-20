@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/images");
   eleventyConfig.addPassthroughCopy("src/assets/css");
   eleventyConfig.addPassthroughCopy("src/assets/js");
+  eleventyConfig.addPassthroughCopy("figma-assets");
 
   // Watch for changes in CSS and JS
   eleventyConfig.addWatchTarget("src/assets/css/");
