@@ -1,0 +1,60 @@
+<svg width="340" height="100" viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wave1Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wave2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#38f9d7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wave3Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43e97b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="pulseGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Three pulse waves (representing three showcase modes) -->
+  <path d="M0 25 L20 25 L30 15 L40 35 L50 15 L60 25 L140 25"
+        stroke="url(#wave1Grad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        filter="url(#pulseGlow)"/>
+
+  <path d="M0 45 L20 45 L30 35 L40 55 L50 35 L60 45 L140 45"
+        stroke="url(#wave2Grad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        filter="url(#pulseGlow)"/>
+
+  <path d="M0 65 L20 65 L30 55 L40 75 L50 55 L60 65 L140 65"
+        stroke="url(#wave3Grad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        filter="url(#pulseGlow)"/>
+
+  <!-- ArcLight Pulse text -->
+  <text x="160" y="45"
+        font-family="Space Grotesk, Arial, sans-serif"
+        font-size="28"
+        font-weight="700"
+        fill="url(#wave1Grad)">ArcLight</text>
+
+  <text x="160" y="70"
+        font-family="Space Grotesk, Arial, sans-serif"
+        font-size="20"
+        font-weight="500"
+        fill="white"
+        opacity="0.8"
+        letter-spacing="3">PULSE</text>
+</svg>

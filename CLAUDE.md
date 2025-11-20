@@ -32,6 +32,8 @@ This website reimagines the traditional design portfolio by applying open-world 
 
 ## 🎨 Design System
 
+**Official Name:** [ArcLight Pulse Design System](./ARCLIGHT_PULSE_BRAND.md)
+
 **All design decisions are documented in [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md)**
 
 This is the single source of truth for:
@@ -41,6 +43,12 @@ This is the single source of truth for:
 - Animation and motion principles
 - Component styles and variants
 - Accessibility guidelines
+
+**Branding Guidelines:** See [`ARCLIGHT_PULSE_BRAND.md`](./ARCLIGHT_PULSE_BRAND.md) for:
+- Official name, taglines, and brand meaning
+- Visual identity and brand voice
+- Usage guidelines and logo specifications
+- Messaging framework and positioning
 
 ### Quick Reference
 
@@ -236,6 +244,26 @@ All showcase modes are fully responsive with:
 ---
 
 ## 📝 Recent Changes
+
+### November 20, 2025
+
+**ArcLight Pulse Branding**
+- Established official design system name: **ArcLight Pulse Design System**
+- Created `ARCLIGHT_PULSE_BRAND.md` with complete branding package
+  - Official name, taglines, and brand meaning
+  - Visual identity guidelines (colors, typography, visual elements)
+  - Brand voice and messaging framework
+  - Usage guidelines and capitalization rules
+  - Logo concepts and specifications
+  - Competitive positioning and launch strategy
+- Created 5 logo variations in `figma-assets/`:
+  - `logo-arclight-lightning.svg` - Lightning Arc (primary lockup)
+  - `logo-arclight-pulse-wave.svg` - Pulse Wave (three waves)
+  - `logo-arclight-hexagon.svg` - Hexagon Bolt (icon/badge format)
+  - `logo-arclight-trail.svg` - Light Trail (motion-focused)
+  - `logo-arclight-circuit.svg` - Energy Circuit (developer-focused)
+- Updated `figma-assets/README.md` with logo documentation
+- Legacy NEON branding retained for reference but marked as deprecated
 
 ### November 19, 2025
 

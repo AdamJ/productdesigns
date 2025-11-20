@@ -59,6 +59,44 @@ All icons use gradient strokes for the neon effect.
 - 200x200px
 - Reference for creating glow effects in Figma
 
+### ArcLight Pulse Logo Variations
+
+**logo-arclight-lightning.svg**
+- Concept 1: Lightning Arc
+- Curved electric arc above wordmark with animated energy flow
+- 320x120px
+- Use: Primary logo, hero sections, headers
+
+**logo-arclight-pulse-wave.svg**
+- Concept 2: Pulse Wave
+- Three pulse waves representing three showcase modes
+- 340x100px
+- Use: Alternate lockup, technical contexts
+
+**logo-arclight-hexagon.svg**
+- Concept 3: Hexagon Bolt
+- Hexagonal badge with lightning bolt and "ALP" text
+- 180x180px
+- Use: Icon/badge format, favicons, avatars, small spaces
+
+**logo-arclight-trail.svg**
+- Concept 4: Light Trail
+- Curved light trail with particle effects
+- 300x100px
+- Use: Motion-focused applications, animated contexts
+
+**logo-arclight-circuit.svg**
+- Concept 5: Energy Circuit
+- Circuit board pattern forming "ALP" letters
+- 320x100px
+- Use: Developer-focused materials, technical documentation
+
+### Legacy Logo Variations (NEON branding - deprecated)
+
+**logo-neon-*.svg**
+- Original branding before rebranding to ArcLight Pulse
+- Kept for reference but should not be used in new designs
+
 ---
 
 ## 🎨 How to Use in Figma

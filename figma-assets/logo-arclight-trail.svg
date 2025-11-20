@@ -1,0 +1,54 @@
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="trailGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#38f9d7;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <filter id="trailGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="particleGrad">
+      <stop offset="0%" style="stop-color:#38f9d7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Curved light trail forming an arc -->
+  <path d="M10 70 Q40 20, 100 40 Q160 60, 180 30"
+        stroke="url(#trailGrad)"
+        stroke-width="8"
+        fill="none"
+        stroke-linecap="round"
+        filter="url(#trailGlow)"
+        opacity="0.8"/>
+
+  <!-- Particle effects along trail -->
+  <circle cx="10" cy="70" r="3" fill="url(#particleGrad)">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="55" cy="30" r="2.5" fill="url(#particleGrad)">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="100" cy="40" r="2" fill="url(#particleGrad)">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="140" cy="45" r="2.5" fill="url(#particleGrad)">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="0.9s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="180" cy="30" r="3" fill="url(#particleGrad)">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="1.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ArcLight Pulse text -->
+  <text x="10" y="90"
+        font-family="Space Grotesk, Arial, sans-serif"
+        font-size="24"
+        font-weight="600"
+        fill="white"
+        letter-spacing="1">ArcLight Pulse</text>
+</svg>
