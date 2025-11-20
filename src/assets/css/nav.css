@@ -201,6 +201,33 @@
     opacity: 0.9;
 }
 
+/* Navigation Divider */
+.nav-divider {
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(67, 233, 123, 0.3) 20%,
+        rgba(56, 249, 215, 0.3) 50%,
+        rgba(67, 233, 123, 0.3) 80%,
+        transparent 100%
+    );
+    margin: 20px 30px;
+    position: relative;
+}
+
+.nav-divider::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #43e97b;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(67, 233, 123, 0.5);
+}
+
 /* Navigation Footer */
 .nav-footer {
     padding: 20px 30px;

@@ -28,6 +28,15 @@ This website reimagines the traditional design portfolio by applying open-world 
    - Ripple and sparkle reveal animations
    - Completion celebration system
 
+### Resources
+
+1. **Brand Identity** (`/branding/`)
+   - Complete branding showcase and guidelines
+   - Logo variations with usage examples
+   - Color palette and typography samples
+   - Brand voice and messaging examples
+   - Download links for brand assets
+
 ---
 
 ## 🎨 Design System
@@ -246,6 +255,28 @@ All showcase modes are fully responsive with:
 ## 📝 Recent Changes
 
 ### November 20, 2025
+
+**Branding Showcase Page**
+- Created `/branding/` demonstration page showcasing complete brand identity
+  - Hero section with brand name, tagline, and attributes
+  - Brand story section explaining Arc, Light, and Pulse meanings
+  - Interactive logo showcase with all 5 variations
+  - Color palette with swatches and gradient examples
+  - Typography showcase with weights and usage examples
+  - Brand voice cards with personality traits
+  - Usage guidelines with correct/incorrect examples
+  - Tagline options grid with primary emphasis
+  - Download section linking to brand assets
+- Added interactive features:
+  - Click-to-copy for color codes and code snippets
+  - Fade-in animations on scroll
+  - Scroll progress indicator
+  - Parallax effect on hero section
+  - Keyboard shortcuts (H/L/C for navigation)
+- Updated navigation menu:
+  - Added "Resources" section with Brand Identity link
+  - Added nav-divider styling for section separation
+  - Updated footer credit to "ArcLight Pulse Design System"
 
 **ArcLight Pulse Branding**
 - Established official design system name: **ArcLight Pulse Design System**
