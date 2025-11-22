@@ -6,13 +6,12 @@ module.exports = function(eleventyConfig) {
 
   // Copy static assets
   eleventyConfig.addPassthroughCopy("src/assets/images");
-  eleventyConfig.addPassthroughCopy("src/assets/css");
   eleventyConfig.addPassthroughCopy("src/assets/js");
   eleventyConfig.addPassthroughCopy("figma-assets");
 
-  // Watch for changes in CSS and JS
-  eleventyConfig.addWatchTarget("src/assets/css/");
+  // Watch for changes in JS and SCSS (SCSS compiled separately by sass)
   eleventyConfig.addWatchTarget("src/assets/js/");
+  eleventyConfig.addWatchTarget("src/assets/scss/");
 
   return {
     dir: {
